@@ -1,0 +1,56 @@
+<template>
+    <!-- TO DO
+        display country as label or tool tip with country info
+        test classes
+        documentation and comments
+        profile permission
+        add fls check in class
+    -->
+    <lightning-card title={title} icon-name="standard:products">
+        <lightning-button label="View Cards" slot="actions" onclick={navigateToProductListView}></lightning-button>
+        <div class="slds-p-horizontal_small">
+            <lightning-layout multiple-rows>
+                <template for:each={productCharges} for:item="productCharge">
+                    <lightning-layout-item key={productCharge.Product} size="12" small-device-size="12"
+                        large-device-size="12" padding="around-small">
+                        <div class="slds-form-element" key={productCharge.Product}>
+                            <lightning-icon icon-name="custom:custom40"></lightning-icon>
+                            <span class="slds-text-title_caps slds-p-horizontal_small">{productCharge.Product}</span>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" key={productCharge.CostperMonth} small-device-size="12"
+                        large-device-size="4" padding="around-small">
+                        <div class="slds-form-element">
+                            <span class="slds-form-element__label">Cost per Calendar Month</span>
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">{productCharge.CostperMonth}</div>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" key={productCharge.ATMFee} small-device-size="12"
+                        large-device-size="4" padding="around-small">
+                        <div class="slds-form-element">
+                            <span class="slds-form-element__label">ATM Fee in other currencies</span>
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">{productCharge.ATMFee}</div>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" key={productCharge.replaceMentCost} small-device-size="12"
+                        large-device-size="4" padding="around-small">
+                        <div class="slds-form-element">
+                            <span class="slds-form-element__label">Card Replacement Cost</span>
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">{productCharge.replaceMentCost}</div>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+        <p slot="footer">
+            <lightning-button label="Update Card Charges" slot="actions" onclick={navigateToProductChargeListView}>
+            </lightning-button>
+        </p>
+    </lightning-card>
+</template>
