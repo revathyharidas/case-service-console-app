@@ -28,8 +28,24 @@
         <members>N26DataDisptacher</members>
         <name>ApexClass</name>
     </types>
-     <types>
+    <types>
+        <members>ProductTriggerHandler</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
         <members>CardInfo</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CardInfoTestFactory</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>N26DataDispatcherTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CardInformationControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -55,17 +71,17 @@
      <types>
         <members>*</members>
         <name>AuraDefinitionBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
-    </types>
+    </types>    
     <types>
         <members>*</members>
         <name>StaticResource</name>
     </types>-->
     <types>
         <members>*</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>product_card_info_test</members>
         <name>ApexTestSuite</name>
     </types>  
     <types>

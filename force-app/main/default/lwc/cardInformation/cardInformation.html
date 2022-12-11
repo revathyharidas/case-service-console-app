@@ -1,13 +1,9 @@
 <template>
-    <!-- TO DO
-        display country as label or tool tip with country info
-        test classes
-        documentation and comments
-        profile permission
-        add fls check in class
-    -->
-    <lightning-card title={title} icon-name="standard:products">
+    <template if:true={hasData}>
+    <!-- Header Section -->
+    <lightning-card title={title} icon-name="standard:products">        
         <lightning-button label="View Cards" slot="actions" onclick={navigateToProductListView}></lightning-button>
+        <!-- Body with Card Charge Country Info -->
         <div class="slds-p-horizontal_small">
             <lightning-layout multiple-rows>
                 <template for:each={productCharges} for:item="productCharge">
@@ -51,6 +47,14 @@
         <p slot="footer">
             <lightning-button label="Update Card Charges" slot="actions" onclick={navigateToProductChargeListView}>
             </lightning-button>
-        </p>
+        </p>            
     </lightning-card>
+</template>   
+<template if:false={hasData}>
+    <lightning-card title="Card Information" icon-name="standard:products">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-text-title_caps slds-text-color_destructive">{error}</div>
+        </div>
+    </lightning-card>
+</template>
 </template>

@@ -6,63 +6,84 @@
 @isTest
 public class CardInformationControllerTest {
     
-	/**
+    /**
     *@description : Method to setup data for the test cases
     */
     @testSetup
     public Static void testDataSetup(){
-        /*Inserting test contact record*/ 
-        List<Contact> contactsToInsert = new List<Contact>();
-        Contact contactRecord = new Contact(FirstName ='Test1', LastName='User', Email = 'test1User@salesforce.com', 
-                                            Home_Country__c='FR', Product__c ='Standard;Black',
-                                            External_Contact_Id__c='a02529fc-788e-11ed-a1eb-0242ac120002'
-                                            );
-        contactsToInsert.add(contactRecord);
-        contactRecord = new Contact(FirstName ='Test2', LastName='User', Email = 'test2User@salesforce.com', 
-                                            Home_Country__c='DE', Product__c ='Metal',
-                                            External_Contact_Id__c='a02529fc-788e-11ed-a1eb-0242ac120002'
-                                            );
-        contactsToInsert.add(contactRecord);
-        INSERT contactsToInsert;
-       
-        /*Inserting card product records*/
-        Product2 card1 = new Product2(Name='Standard');
-        Product2 card2 = new Product2(Name='Black');
-        Product2 card3 = new Product2(Name='Metal');
-        List<Product2> productsToInsert = new List<Product2>{card1,card2,card3};
-        INSERT productsToInsert;
         
-        /*Inserting case records*/
-        Case caseRecord = new Case(Status = 'New', Origin = 'Email', Subject = 'Lost credit card', ContactId = contactsToInsert[0].id);
-        Case caseRecord1 = new Case(Status = 'New', Origin = 'Phone',  Subject = 'Renew debit card' , ContactId = contactsToInsert[1].id);
-        List<Case> casesToInsert = new List<Case>{caseRecord, caseRecord1};
-        INSERT casesToInsert;
+        ID adminProfileId = [Select Id FROM Profile WHERE Name = 'System Administrator' LIMIT 1].Id;
+        User adminUser = [select id, UserRoleId from user where id =: UserInfo.getUserId()];
         
-        /*Inserting card charge recs */
-        List<Card_Charge__c> cardChargesToInsert = new List<Card_Charge__c>();
-        for(Product2 productRec : [SELECT Id, Name FROM Product2 WHERE Name IN ('Standard', 'Black', 'Metal')]){
-            Card_Charge__c card = new Card_Charge__c();
-            card.Product__c = productRec.Id;
-            card.Legal_Country__c = 'FR';
-            card.ATM_Fee_in_other_currencies__c = 'Free';
-            card.Card_Replacement_Cost__c = '€ 6';
-            card.Cost_per_Calendar_Month__c = '€ 9,90';
-            cardChargesToInsert.add(card);
-            
-            card = new Card_Charge__c();
-            card.Product__c = productRec.Id;
-            card.Legal_Country__c = 'DE';
-            card.ATM_Fee_in_other_currencies__c = '1.7%';
-            card.Card_Replacement_Cost__c = '€ 6';
-            card.Cost_per_Calendar_Month__c = '€ 16,90';
-            cardChargesToInsert.add(card);
+        System.runAs(adminUser){
+           CardInfoTestFactory.createCaseAgent();
+           CardInfoTestFactory.createCaseCardTestData();
         }
-        
-        INSERT cardChargesToInsert;
     }
     
-    @isTest static void getCardChargeInfoTest() {
-        
+    /*
+    * description positive scenario with first contact who has 1 card product
+    */
+    @isTest static void getCardChargeInfoTest_contact1() {
+        User agentUser = [SELECT Id FROM User WHERE Email ='agentTestUser@salesforce.com'];
+        System.runAs(agentUser){
+            Case caseRecord = [SELECT Id, Status, Origin, Subject, ContactId FROM Case WHERE Subject = 'Renew debit card'];
+            List<Card_Charge__c> charges = CardInformationController.getCardChargeInfo(caseRecord.Id);
+            Contact currentCustomer = [SELECT Id, Product__c, Home_Country__c FROM Contact Where Id IN (SELECT ContactId FROM CASE Where Id=: caseRecord.Id)];
+            List<String> productTypes = currentCustomer.Product__c.split(';');         
+            System.assertEquals(productTypes.size(), charges.size(), 'one card charge info should be returned since the contact has only one products');
+            System.assertEquals(currentCustomer.Home_Country__c, charges[0].Legal_Country__c, 'Contact\'s country should match the product charge legal country!');
+        }
+    }
+    
+    /*
+    * description positive scenario with second contact who has 2 card products
+    */
+    @isTest static void getCardChargeInfoTest_contact2() {
+        User agentUser = [SELECT Id FROM User WHERE Email ='agentTestUser@salesforce.com'];
+        System.runAs(agentUser){
+            Case caseRecord = [SELECT Id, Status, Origin, Subject, ContactId FROM Case WHERE Subject = 'Lost credit card'];
+            List<Card_Charge__c> charges = CardInformationController.getCardChargeInfo(caseRecord.Id);
+            Contact currentCustomer = [SELECT Id, Product__c, Home_Country__c FROM Contact Where Id IN (SELECT ContactId FROM CASE Where Id=: caseRecord.Id)];
+            List<String> productTypes = currentCustomer.Product__c.split(';');
+            System.assertEquals(productTypes.size(), charges.size(), '2 card charge info should be returned since the contact has 2 products!');
+            System.assertEquals(currentCustomer.Home_Country__c, charges[0].Legal_Country__c, 'Contact\'s country should match the product charge legal country!');
+        }
+    }
+    
+    /*
+    * description negative scenario : caseid as null
+    */
+    @isTest static void getCardChargeInfoTest_ex() {
+        User agentUser = [SELECT Id FROM User WHERE Email ='agentTestUser@salesforce.com'];
+        System.runAs(agentUser){
+            try{
+                List<Card_Charge__c> charges = CardInformationController.getCardChargeInfo(null);    
+            }
+            catch(Exception ex){
+                System.assertEquals(ex.getTypeName(), 'System.AuraHandledException');
+                System.assertEquals(ex.getMessage(), 'Script-thrown exception');
+            }           
+        }
     }
 
+	/*
+    * description negative scenario: case which has no contact
+    */
+    @isTest static void getCardChargeInfoTest_invalidCase() {
+        User agentUser = [SELECT Id FROM User WHERE Email ='agentTestUser@salesforce.com'];
+        System.runAs(agentUser){
+            try{
+                Case caseRecord = new Case(Status = 'New', Origin = 'Email', Subject = 'Lost credit card', ContactId = null);
+                INSERT caseRecord;
+
+                List<Card_Charge__c> charges = CardInformationController.getCardChargeInfo(caseRecord.Id);    
+            }
+            catch(Exception ex){
+                System.assertEquals(ex.getTypeName(), 'System.AuraHandledException');
+                System.assertEquals(ex.getMessage(), 'Script-thrown exception');
+            }           
+        }
+    }
+    
 }
