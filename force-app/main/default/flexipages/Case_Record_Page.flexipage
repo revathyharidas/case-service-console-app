@@ -105,8 +105,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>productInformation</componentName>
-                <identifier>c_productInformation</identifier>
+                <componentName>cardInformation</componentName>
+                <identifier>c_cardInformation</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

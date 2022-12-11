@@ -5,7 +5,7 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>ProductInformationController</apexClass>
+        <apexClass>CardInformationController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <description>This custom permission set is used to provide access for N26 Case study APP related components, objects and fields.</description>
