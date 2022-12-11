@@ -1,8 +1,8 @@
 {
-  "name": "salesforce-app",
+  "name": "case-service-console-app",
   "private": true,
   "version": "1.0.0",
-  "description": "Salesforce App",
+  "description": "case-service-console-app",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
     "test": "npm run test:unit",

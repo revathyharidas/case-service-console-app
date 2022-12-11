@@ -5,6 +5,10 @@
     <name>CustomApplication</name>
     </types>
      <types>
+    <members>N26_Case_Study_Service_Console</members>
+    <name>CustomApplication</name>
+    </types>
+     <types>
         <members>N26DataConnector</members>
         <name>ConnectedApp</name>
     </types>
@@ -60,22 +64,6 @@
         <members>*</members>
         <name>Layout</name>
     </types>
-    <!--<types>
-        <members>*</members>
-        <name>ApexComponent</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexPage</name>
-    </types>
-     <types>
-        <members>*</members>
-        <name>AuraDefinitionBundle</name>
-    </types>    
-    <types>
-        <members>*</members>
-        <name>StaticResource</name>
-    </types>-->
     <types>
         <members>*</members>
         <name>ApexTrigger</name>
