@@ -41,8 +41,8 @@
     </quickActionLayout>
     <standardLabel>CreateNew</standardLabel>
     <successMessage>Success</successMessage>
-    <targetObject>Product_Charge__c</targetObject>
+    <targetObject>Card_Charge__c</targetObject>
     <targetParentField>Product__c</targetParentField>
-    <targetRecordType>Product_Charge__c.Mastercard</targetRecordType>
+    <targetRecordType>Card_Charge__c.Mastercard</targetRecordType>
     <type>Create</type>
 </QuickAction>

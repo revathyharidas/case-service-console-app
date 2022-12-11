@@ -625,12 +625,12 @@
         <type>Flexipage</type>
         <profile>ContractManager</profile>
     </profileActionOverrides>
+    <setupExperience>all</setupExperience>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>standard-Case</tabs>
     <tabs>standard-Product2</tabs>
-    <tabs>standard-Pricebook2</tabs>
-    <tabs>Product_Charge__c</tabs>
+    <tabs>Card_Charge__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>N26_Case_Study_App_UtilityBar</utilityBar>
 </CustomApplication>

@@ -209,13 +209,12 @@
         <externalId>false</externalId>
         <label>Product</label>
         <referenceTo>Product2</referenceTo>
-        <relationshipLabel>Product Charges</relationshipLabel>
         <relationshipName>Product_Charges</relationshipName>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
-    <label>Product Charge</label>
+    <label>Card Charge</label>
     <listViews>
         <fullName>All</fullName>
         <filterScope>Everything</filterScope>
@@ -224,16 +223,17 @@
     <listViews>
         <fullName>AllCharges</fullName>
         <columns>Product__c</columns>
+        <columns>RECORDTYPE</columns>
         <columns>Legal_Country__c</columns>
-        <columns>Card_Replacement_Cost__c</columns>
-        <columns>ATM_Fee_in_other_currencies__c</columns>
         <columns>Cost_per_Calendar_Month__c</columns>
+        <columns>ATM_Fee_in_other_currencies__c</columns>
+        <columns>Card_Replacement_Cost__c</columns>
+        <columns>CURRENCY_ISO_CODE</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
         <filterScope>Mine</filterScope>
-        <filters>
-            <field>RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Product_Charge__c.Mastercard</value>
-        </filters>
         <label>AllCharges</label>
     </listViews>
     <nameField>
@@ -241,7 +241,7 @@
         <label>Product Charge Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Product Charges</pluralLabel>
+    <pluralLabel>Card Charges</pluralLabel>
     <recordTypes>
         <fullName>Mastercard</fullName>
         <active>true</active>

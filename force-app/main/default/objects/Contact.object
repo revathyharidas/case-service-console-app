@@ -368,7 +368,7 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
-        <fullName>External_Contact_Id__C</fullName>
+        <fullName>External_Contact_Id__c</fullName>
         <caseSensitive>true</caseSensitive>
         <description>This field will contain the unique identifier (UUID) from the external system that is mapped to every contact
 record in Salesforce.</description>

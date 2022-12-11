@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
-        <application>N26_Case_Study_App</application>
+        <application>N26_Case_Study_Service_Console</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <classAccesses>
+        <apexClass>ProductInformationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>This custom permission set is used to provide access for N26 Case study APP related components, objects and fields.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Card_Charge__c.Product__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.AccountId</field>
@@ -92,7 +101,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.External_Id__c</field>
+        <field>Contact.External_Contact_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -120,13 +129,17 @@
         <field>Product2.StockKeepingUnit</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Product_Charge__c.Product__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <hasActivationRequired>true</hasActivationRequired>
+    <hasActivationRequired>false</hasActivationRequired>
     <label>N26CaseStudyApp</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Card_Charge__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -154,27 +167,14 @@
         <object>Product2</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Product_Charge__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
+    <recordTypeVisibilities>
+        <recordType>Card_Charge__c.Mastercard</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>Product2.MasterCard</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Product_Charge__c.Mastercard</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <tabSettings>
-        <tab>Product_Charge__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
     <tabSettings>
         <tab>standard-Case</tab>
         <visibility>Visible</visibility>
