@@ -1,0 +1,2 @@
+[
+    {"country":"DE","cost_per_calender_month":"€ 9,90","card_type":"Black","card_replacement_cost":"€ 6","atm_fee_in_other_currencies":"Free"},{"country":"DE","cost_per_calender_month":"€ 0","card_type":"Standard","card_replacement_cost":"€ 6","atm_fee_in_other_currencies":"1.7%"},{"country":"DE","cost_per_calender_month":"€ 16,90","card_type":"Metal","card_replacement_cost":"€ 45","atm_fee_in_other_currencies":"Free"}]

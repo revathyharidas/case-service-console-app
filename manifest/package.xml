@@ -33,7 +33,7 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>ProductTriggerHandler</members>
+        <members>Product2TriggerHandler</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -69,12 +69,16 @@
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>product_card_info_test</members>
+        <members>*</members>
         <name>ApexTestSuite</name>
     </types>  
     <types>
         <members>*</members>
         <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Card_Charge__c</members>
+        <name>CustomTab</name>
     </types>  
     <types>
         <members>cardInformation</members>
