@@ -34,7 +34,7 @@ public class N26DataDispatcherTest {
             RestResponse response = RestContext.response; 
             // Call the method to test
             N26DataDisptacher.getCardInfoByContact();
-            System.assertEquals(RestContext.response.statusCode, 200);
+            System.assertEquals(200,RestContext.response.statusCode);
         }        
     }  
     
@@ -53,7 +53,7 @@ public class N26DataDispatcherTest {
             RestResponse response = RestContext.response; 
             // Call the method to test
             N26DataDisptacher.getCardInfoByContact();
-            System.assertEquals(RestContext.response.statusCode, 500);
+            System.assertEquals(500,RestContext.response.statusCode);
         }
         Catch(Exception ex){
             system.debug('testGetCaseById_noAccess ex '+ex);
@@ -77,7 +77,7 @@ public class N26DataDispatcherTest {
                 RestResponse response = RestContext.response; 
                 // Call the method to test
                 N26DataDisptacher.getCardInfoByContact();
-                System.assertEquals(RestContext.response.statusCode, 400);
+                System.assertEquals(400,RestContext.response.statusCode);
             }
             Catch(Exception ex){
                 system.debug('testGetCaseById_invalidId ex '+ex);

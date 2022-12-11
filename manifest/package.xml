@@ -84,5 +84,13 @@
         <members>cardInformation</members>
         <name>LightningComponentBundle</name>
     </types>
+    <types>
+        <members>CardTypes</members>
+        <name>GlobalValueSet</name>
+    </types>
+	<types>
+        <members>LegalCountryList</members>
+        <name>GlobalValueSet</name>
+    </types>
     <version>55.0</version>
 </Package>

@@ -12,15 +12,14 @@ global with sharing class N26DataDisptacher {
     */
     @HttpGet
     global static void getCardInfoByContact() {
-        final string UUID_REGEX = '^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$';      
+        final string UUID_REGEX = '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}';      
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;  
         String contactUUID =  RestContext.request.params.get('uuid');
         
         /*Input Validation for UUID*/
         Pattern uuidPattern = Pattern.compile(UUID_REGEX);
-        Matcher uuidMatcher = uuidPattern.matcher(contactUUID);
-        
+        Matcher uuidMatcher = uuidPattern.matcher(contactUUID);        
         If(!uuidMatcher.matches()){            
             response.responseBody = Blob.valueOf('Invalid Input');
             response.statusCode = 400;
@@ -40,6 +39,7 @@ global with sharing class N26DataDisptacher {
                 card.card_replacement_cost = cardCharge.Card_Replacement_Cost__c;
                 liInfo.add(card);
             }
+            response.addHeader('Content-Type', 'application/json');
             response.responseBody = Blob.valueOf(JSON.serialize(liInfo));
             response.statusCode = 200;   
         }        
